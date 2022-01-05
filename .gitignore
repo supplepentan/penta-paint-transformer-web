@@ -1,0 +1,9 @@
+venv/
+model.pth
+input/
+output/
+picture/
+train/
+__pycache__/
+_inference/
+run.py/
