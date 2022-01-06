@@ -10,5 +10,8 @@ python -m pip install torch==1.10.1+cu113 torchvision==0.11.2+cu113 -f https://d
 python setup.py
 python inference.py
 
+# Serve
+uvicorn main:app --reload
+
 # Original
 https://arxiv.org/abs/2108.03798

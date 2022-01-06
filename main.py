@@ -51,9 +51,7 @@ async def index(file: UploadFile = File(...)):
     #im = Image.open(BytesIO(contents))
     image = Image.open(BytesIO(contents)).convert('RGB')
     image.save('input/input.jpg')
-    if not os.path.exists("./front/dist/img_res"):
-        os.mkdir("./front/dist/img_res")
-    subprocess.run(["python", "run.py"])
+    subprocess.run(["python", "inference.py"])
 
     return {"msg":"Finished"}
 if __name__ == "__main__":

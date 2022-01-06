@@ -487,10 +487,10 @@ def main(input_path, model_path, output_dir, need_animation=False, resize_h=None
 
 
 if __name__ == '__main__':
-    main(input_path='input/bingbing.jpg',
+    main(input_path='input/input.jpg',
          model_path='model.pth',
          output_dir='output/',
-         need_animation=True,  # whether need intermediate results for animation.
+         need_animation=False,  # whether need intermediate results for animation.
          resize_h=None,         # resize original input to this size. None means do not resize.
          resize_w=None,         # resize original input to this size. None means do not resize.
-         serial=True)          # if need animation, serial must be True.
+         serial=False)          # if need animation, serial must be True.
