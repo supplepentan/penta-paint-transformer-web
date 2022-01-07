@@ -1,9 +1,22 @@
 <template>
   <div class="container home">
     <div class="row">
+      {{ previewBase64 }}
+      <div class="col-1"></div>
+      <div class="col-5">
+        <img v-bind:src=" previewBase64 " class="img-fluid" alt="" />
+      </div>
+      <div class="col-5">
+        <img v-bind:src="'data:image/jpeg;base64,'+bstr" class="img-fluid" alt="" />
+      </div>
+      <div class="col-1"></div>
+    </div>
+    
+    
+    <div class="row">
       <Viewer msg="Penta Paint Transformer" seen1="true" />
     </div>
-    <br/>
+    <br />
     <div class="row">
       <div v-show="seen1" class="col-12">
         <p><input type="file" v-on:change="fileSelected" /></p>
@@ -17,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, render } from "vue";
 import Viewer from "@/components/Viewer.vue"; // @ is an alias to /src
 import axios from "axios";
 
@@ -29,25 +42,26 @@ export default defineComponent({
   data: function () {
     return {
       fileInfo: "",
-      // ダウンロード URL (Blob)
-      downloadUrl: null,
-      // ファイル名
       fileName: "no01",
-      requestBody: "",
       seen0: true,
       seen1: true,
       seen2: false,
       seen3: false,
-      picked: "papapa",
-      showUserImage: "",
+      bstr: {},
+      file: {},
+      previewBase64: {},
     };
   },
   methods: {
     fileSelected(event: any) {
       this.fileInfo = event.target.files[0];
-      console.log("kokokokoo");
-      console.log(this.picked);
+      this.file = event as File;
       this.seen2 = true;
+      const reader = new FileReader();
+      reader.onload = (event:any) => {
+                    this.previewBase64 = event.target.result;
+                }
+                reader.readAsDataURL(event.target.files[0]);
     },
     async fileUpload(): Promise<void> {
       const formData: any = new FormData();
@@ -59,6 +73,8 @@ export default defineComponent({
       this.seen2 = false;
       this.seen3 = true;
       axios.post("http://127.0.0.1:8000/upload", formData).then((response) => {
+        this.bstr = response.data;
+        console.log(this.bstr);
         this.seen0 = true;
         this.seen1 = true;
         this.seen3 = false;

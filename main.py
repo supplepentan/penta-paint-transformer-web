@@ -18,6 +18,7 @@ from io import BytesIO
 
 from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import base64
 
 app = FastAPI(
     title='さぷりぺんたんの油絵AI',
@@ -52,7 +53,10 @@ async def index(file: UploadFile = File(...)):
     image = Image.open(BytesIO(contents)).convert('RGB')
     image.save('input/input.jpg')
     subprocess.run(["python", "inference.py"])
-
-    return {"msg":"Finished"}
+    with open("output/input.jpg", "rb") as image_file:
+        data = base64.b64encode(image_file.read())
+        print(type(data))
+    return data.decode('utf-8')
+    #return {"msg":"Finished"}
 if __name__ == "__main__":
     uvicorn.main(app=app)
