@@ -1,7 +1,6 @@
 <template>
   <div class="container home">
     <div class="row">
-      {{ previewBase64 }}
       <div class="col-1"></div>
       <div class="col-5">
         <img v-bind:src=" previewBase64 " class="img-fluid" alt="" />
@@ -13,7 +12,7 @@
     </div>
     
     
-    <div class="row">
+    <div v-show="seen0" class="row">
       <Viewer msg="Penta Paint Transformer" seen1="true" />
     </div>
     <br />
@@ -56,6 +55,7 @@ export default defineComponent({
     fileSelected(event: any) {
       this.fileInfo = event.target.files[0];
       this.file = event as File;
+      this.seen0 = false;
       this.seen2 = true;
       const reader = new FileReader();
       reader.onload = (event:any) => {
@@ -75,7 +75,7 @@ export default defineComponent({
       axios.post("http://127.0.0.1:8000/upload", formData).then((response) => {
         this.bstr = response.data;
         console.log(this.bstr);
-        this.seen0 = true;
+        this.seen0 = false;
         this.seen1 = true;
         this.seen3 = false;
       });
