@@ -72,7 +72,7 @@ export default defineComponent({
       this.seen1 = false;
       this.seen2 = false;
       this.seen3 = true;
-      axios.post("https://penta-paint-transformer.herokuapp.com/", formData).then((response) => {
+      axios.post("https://penta-paint-transformer.herokuapp.com/upload", formData).then((response) => {
         this.bstr = response.data;
         console.log(this.bstr);
         this.seen0 = false;
