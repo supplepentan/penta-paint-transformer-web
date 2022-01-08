@@ -5,3 +5,4 @@ fastapi
 Jinja2
 uvicorn
 python-multipart
+gunicorn
