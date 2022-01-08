@@ -6,3 +6,5 @@ Jinja2
 uvicorn
 python-multipart
 gunicorn
+torch
+torchvision
