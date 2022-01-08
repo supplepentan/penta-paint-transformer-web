@@ -7,4 +7,3 @@ uvicorn
 python-multipart
 gunicorn
 torch
-torchvision
