@@ -373,7 +373,7 @@ def crop(img, h, w):
     return img
 
 
-def main(input_path, model_path, output_dir, need_animation=False, resize_h=None, resize_w=None, serial=False):
+def inference_main(input_path, model_path, output_dir, need_animation=False, resize_h=None, resize_w=None, serial=False):
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     input_name = os.path.basename(input_path)
@@ -485,7 +485,7 @@ def main(input_path, model_path, output_dir, need_animation=False, resize_h=None
         final_result = crop(final_result, original_h, original_w)
         save_img(final_result[0], output_path)
 
-
+"""
 if __name__ == '__main__':
     main(input_path='input/input.jpg',
          model_path='model.pth',
@@ -494,3 +494,4 @@ if __name__ == '__main__':
          resize_h=512,         # resize original input to this size. None means do not resize.
          resize_w=512,         # resize original input to this size. None means do not resize.
          serial=False)          # if need animation, serial must be True.
+"""

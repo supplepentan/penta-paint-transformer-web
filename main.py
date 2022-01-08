@@ -1,24 +1,19 @@
 # 必要なモジュールを読み込む
 from fastapi import FastAPI, UploadFile, Form, Body
 from fastapi.staticfiles import StaticFiles
-import tempfile
-from PIL import Image
-import subprocess
-import os
-import zipfile
-import shutil
+from fastapi.responses import FileResponse
 from fastapi.params import File
-
-import uvicorn
 from starlette.requests import Request
 from starlette.templating import Jinja2Templates
-from starlette.requests import Request
-from fastapi.responses import FileResponse
-from io import BytesIO
-
 from starlette.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import uvicorn
+from PIL import Image
+import subprocess
+from io import BytesIO
 import base64
+
+from inference import inference_main
 
 app = FastAPI(
     title='さぷりぺんたんの油絵AI',
@@ -52,7 +47,9 @@ async def index(file: UploadFile = File(...)):
     #im = Image.open(BytesIO(contents))
     image = Image.open(BytesIO(contents)).convert('RGB')
     image.save('input/input.jpg')
-    subprocess.run(["python", "inference.py"])
+    #subprocess.run(["python", "inference.py"])
+    inference_main(input_path="input/input.jpg", model_path="model.pth",  output_dir="output", need_animation=False, resize_h=None, resize_w=None, serial=False)
+
     with open("output/input.jpg", "rb") as image_file:
         data = base64.b64encode(image_file.read())
         print(type(data))
