@@ -46,7 +46,7 @@ def index(request: Request):
                                       {'request': request})
 
 @app.post("/upload")
-await def index(file: UploadFile = File(...)):
+async def index(file: UploadFile = File(...)):
     print(file)
     contents = await file.read()
     #im = Image.open(BytesIO(contents))
