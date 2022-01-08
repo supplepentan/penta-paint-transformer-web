@@ -52,7 +52,7 @@ async def index(file: UploadFile = File(...)):
     #im = Image.open(BytesIO(contents))
     image = Image.open(BytesIO(contents)).convert('RGB')
     image.save('input/input.jpg')
-    subprocess.run(["python3", "inference.py"])
+    subprocess.run(["python", "inference.py"])
     with open("output/input.jpg", "rb") as image_file:
         data = base64.b64encode(image_file.read())
         print(type(data))

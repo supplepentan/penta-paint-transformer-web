@@ -491,6 +491,6 @@ if __name__ == '__main__':
          model_path='model.pth',
          output_dir='output/',
          need_animation=False,  # whether need intermediate results for animation.
-         resize_h=128,         # resize original input to this size. None means do not resize.
-         resize_w=128,         # resize original input to this size. None means do not resize.
+         resize_h=512,         # resize original input to this size. None means do not resize.
+         resize_w=512,         # resize original input to this size. None means do not resize.
          serial=False)          # if need animation, serial must be True.
